@@ -12,6 +12,8 @@ target 'TaxCalculator' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'TaxCalculatorTests' do
     inherit! :complete
     # Pods for testing
