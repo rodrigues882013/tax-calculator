@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
+import {Text, SafeAreaView, TouchableOpacity, View, Alert} from 'react-native';
 import styles from './style';
-import Banner from '../../components/molecules/banner';
+import Logo from '../../components/molecules/logo';
 import TermsAndConditions from '../../components/molecules/terms-and-conditions';
 
 const OnBoarding = ({navigation}) => {
@@ -12,19 +12,14 @@ const OnBoarding = ({navigation}) => {
     if (agree) {
       setIsAgree(true);
     }
-
     setModalVisible(!isModalVisible);
   };
 
   return (
     <View>
-      <TermsAndConditions
-        isModalVisible={isModalVisible}
-        toggleModal={toggleModal}
-      />
       <SafeAreaView style={styles.container}>
         <View style={styles.logoStyle}>
-          <Banner />
+          <Logo />
         </View>
 
         <View style={styles.explanationStyle}>
@@ -40,14 +35,23 @@ const OnBoarding = ({navigation}) => {
             style={styles.button}
             onPress={() => {
               if (isAgree) navigation.navigate('Home');
+              else
+                Alert.alert(
+                  'Importante!!!',
+                  'Você precisa ler e concordar com nossos termos de uso antes!!',
+                  [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+                  {cancelable: false},
+                );
             }}>
             <Text style={styles.buttonText}>Começar</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => toggleModal({agree: false})}>
-            <Text style={{textAlign: 'center', marginBottom: '5%'}}>
-              Termos de uso, saiba mais
-            </Text>
-          </TouchableOpacity>
+
+          {!isAgree ? (
+            <TermsAndConditions
+              isModalVisible={isModalVisible}
+              toggleModal={toggleModal}
+            />
+          ) : null}
         </View>
       </SafeAreaView>
     </View>

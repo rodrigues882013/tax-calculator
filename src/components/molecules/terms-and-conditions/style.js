@@ -1,15 +1,7 @@
 import {StyleSheet} from 'react-native';
-import spaces from './sizes';
+import spaces from '../../sizes';
 
 export default StyleSheet.create({
-  container: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    backgroundColor: '#ffffff',
-    paddingHorizontal: 15,
-  },
   button: {
     alignItems: 'center',
     fontWeight: 'bold',
@@ -23,13 +15,7 @@ export default StyleSheet.create({
     color: '#ffffff',
     fontSize: 20,
   },
-  logoStyle: {
-    marginTop: spaces.space5,
-    alignContent: 'center',
-    justifyContent: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-  },
+
   explanationStyle: {
     marginTop: spaces.space5,
     alignContent: 'center',
@@ -54,5 +40,11 @@ export default StyleSheet.create({
   contentTitle: {
     fontSize: 20,
     marginBottom: 12,
+  },
+  termHeader: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#01223e',
+    textAlign: 'left',
   },
 });
