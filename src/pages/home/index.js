@@ -1,8 +1,9 @@
+/* eslint-disable-next-line react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, Text, Image} from 'react-native';
-import {ProgressSteps, ProgressStep} from 'react-native-progress-steps';
+import {Text, View} from 'react-native';
+import {Card, Input} from 'react-native-elements';
+import {ProgressStep, ProgressSteps} from 'react-native-progress-steps';
 import styles, {stepLabelStyle} from './style';
-import {Input, Card} from 'react-native-elements';
 
 const Home = ({navigation}) => {
   const [stockCode, setStockCode] = useState(0);

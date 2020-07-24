@@ -34,14 +34,16 @@ const OnBoarding = ({navigation}) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              if (isAgree) navigation.navigate('Home');
-              else
+              if (isAgree) {
+                navigation.navigate('Home');
+              } else {
                 Alert.alert(
                   'Importante!!!',
                   'Você precisa ler e concordar com nossos termos de uso antes!!',
                   [{text: 'OK', onPress: () => console.log('OK Pressed')}],
                   {cancelable: false},
                 );
+              }
             }}>
             <Text style={styles.buttonText}>Começar</Text>
           </TouchableOpacity>

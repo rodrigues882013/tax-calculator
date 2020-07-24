@@ -1,27 +1,27 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import styles from './style';
 import Modal from 'react-native-modal';
-import { Divider } from 'react-native-elements';
+import {Divider} from 'react-native-elements';
 
-export default TermsAndConditions = ({ isModalVisible, toggleModal }) => {
-  const agree = () => toggleModal({ agree: true });
+const TermsAndConditions = ({isModalVisible, toggleModal}) => {
+  const agree = () => toggleModal({agree: true});
 
   return (
     <View>
-      <TouchableOpacity onPress={() => toggleModal({ agree: false })}>
-        <Text style={{ textAlign: 'center', marginBottom: '5%' }}>
+      <TouchableOpacity onPress={() => toggleModal({agree: false})}>
+        <Text style={{textAlign: 'center', marginBottom: '5%'}}>
           Termos de uso, saiba mais
         </Text>
       </TouchableOpacity>
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <Modal
           onBackButtonPress={toggleModal}
           isVisible={isModalVisible}
           style={styles.content}>
-          <View style={{ flex: 1 }}>
+          <View style={{flex: 1}}>
             <Text style={styles.termHeader}>Termo de uso</Text>
-            <Divider style={{ backgroundColor: '#01223e' }} />
+            <Divider style={{backgroundColor: '#01223e'}} />
             <Text style={styles.textExplanation}>
               {'\n'}
               Gostariamos de informar que ao usar as funcionalidades do
@@ -43,3 +43,5 @@ export default TermsAndConditions = ({ isModalVisible, toggleModal }) => {
     </View>
   );
 };
+
+export default TermsAndConditions;
