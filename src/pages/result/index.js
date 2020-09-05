@@ -8,3 +8,5 @@ const Result = ({navigate}) => {
     </View>
   );
 };
+
+export default Result;
