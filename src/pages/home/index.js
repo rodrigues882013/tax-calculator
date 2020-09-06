@@ -5,6 +5,7 @@ import {ProgressStep, ProgressSteps} from 'react-native-progress-steps';
 import styles, {stepLabelStyle} from './style';
 import moment from 'moment';
 import DatePicker from 'react-native-datepicker';
+import Banner from '../../components/organisms/admob/banner';
 
 const InputInformationComponent = ({
   stockCode,
@@ -194,6 +195,7 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Banner />
       <ProgressSteps {...stepLabelStyle}>
         <ProgressStep nextBtnTextStyle={styles.buttonTextStyle} label="Etapa 1">
           <InputInformationComponent

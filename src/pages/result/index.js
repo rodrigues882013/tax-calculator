@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 import {fetchData, buildReport} from './../../services';
 import numeral from 'numeral';
 import 'numeral/locales/pt-br';
 
 import styles from './../onboarding/style';
+import Banner from '../../components/organisms/admob/banner';
 
 const ZeroTaxComponent = () => (
   <View>
@@ -61,26 +62,30 @@ const Result = ({route, navigation}) => {
 
   return (
     <View>
-      {error ? (
-        <ErrorComponentComponent />
-      ) : valueCharged === 0 ? (
-        <ZeroTaxComponent />
-      ) : (
-        <TaxChargedComponent
-          valueCharged={valueCharged}
-          stockCode={stockCode}
-        />
-      )}
-      <View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate('Home');
-            navigation.reset({index: 0, routes: [{name: 'Home'}]});
-          }}>
-          <Text style={styles.buttonText}>Nova Estimativa</Text>
-        </TouchableOpacity>
-      </View>
+      <Banner />
+
+      <SafeAreaView>
+        {error ? (
+          <ErrorComponentComponent />
+        ) : valueCharged === 0 ? (
+          <ZeroTaxComponent />
+        ) : (
+          <TaxChargedComponent
+            valueCharged={valueCharged}
+            stockCode={stockCode}
+          />
+        )}
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Home');
+              navigation.reset({index: 0, routes: [{name: 'Home'}]});
+            }}>
+            <Text style={styles.buttonText}>Nova Estimativa</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     </View>
   );
 };

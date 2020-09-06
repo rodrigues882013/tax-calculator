@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, SafeAreaView, TouchableOpacity, View, Alert} from 'react-native';
 import styles from './style';
 import Logo from '../../components/molecules/logo';
+import Banner from '../../components/organisms/admob/banner';
 import TermsAndConditions from '../../components/molecules/terms-and-conditions';
 
 const OnBoarding = ({navigation}) => {
@@ -18,6 +19,8 @@ const OnBoarding = ({navigation}) => {
   return (
     <View>
       <SafeAreaView style={styles.container}>
+        <Banner />
+
         <View style={styles.logoStyle}>
           <Logo />
         </View>
