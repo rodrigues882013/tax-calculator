@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import {Card, Input, Icon} from 'react-native-elements';
+import {Text, View, Alert} from 'react-native';
+import {Card, Input, Icon, CheckBox} from 'react-native-elements';
 import {ProgressStep, ProgressSteps} from 'react-native-progress-steps';
 import styles, {stepLabelStyle} from './style';
 import moment from 'moment';
@@ -11,10 +11,12 @@ const InputInformationComponent = ({
   dateBought,
   dateSold,
   quantity,
+  isRealStateStock,
   setDateBought,
   setDateSold,
   setStockCode,
   setQuantity,
+  setIsRealStateStock,
 }) => {
   try {
     return (
@@ -107,11 +109,17 @@ const InputInformationComponent = ({
           iconComponent={<Icon name="calendar" type="foundation" />}
         />
         <Input
+          keyboardType="number-pad"
           key={'txtQuantity'}
           label="Quantidade Vendida"
           placeholder="Ex.: 1, 2..."
           value={quantity}
           onChangeText={(v) => setQuantity(v)}
+        />
+        <CheckBox
+          title="É Fundo Imobiliário?"
+          checked={isRealStateStock}
+          onPress={() => setIsRealStateStock(!isRealStateStock)}
         />
       </View>
     );
@@ -126,19 +134,19 @@ const IncomeTaxResultComponent = ({
   dateBought,
   dateSold,
   quantity,
+  isRealStateStock,
 }) => {
   return (
     <View style={{alignItems: 'center'}}>
       <Card title="Resumo das informações">
         <View>
           <Text style={styles.name}>Nome do Ativo: {stockCode}</Text>
-          <Text style={styles.name}>
-            Data da Compra: {moment(dateBought).format('YYYY-MM-DD')}
-          </Text>
-          <Text style={styles.name}>
-            Data do Venda: {moment(dateSold).format('YYYY-MM-DD')}
-          </Text>
+          <Text style={styles.name}>Data da Compra: {dateBought}</Text>
+          <Text style={styles.name}>Data do Venda: {dateSold}</Text>
           <Text style={styles.name}>Quantidade Comprada: {quantity}</Text>
+          <Text style={styles.name}>
+            Fundo Imobiliário: {isRealStateStock ? 'Sim' : 'Não'}
+          </Text>
         </View>
       </Card>
     </View>
@@ -146,21 +154,41 @@ const IncomeTaxResultComponent = ({
 };
 
 const Home = ({navigation}) => {
-  const [stockCode, setStockCode] = useState(0);
+  const [isRealStateStock, setIsRealStateStock] = useState(false);
+  const [stockCode, setStockCode] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [dateBought, setDateBought] = useState(
-    new Date(moment(new Date()).format('YYYY-MM-DD')),
+    moment(new Date()).format('DD-MM-YYYY').toString(),
   );
   const [dateSold, setDateSold] = useState(
-    new Date(moment(new Date()).format('YYYY-MM-DD')),
+    moment(new Date()).format('DD-MM-YYYY').toString(),
   );
 
   const onSubmit = () => {
+    if (!stockCode || !quantity || !/^\d*$/.test(quantity)) {
+      let message =
+        !stockCode && !quantity
+          ? 'Você precisa nos informar a quantidade comprada e o código do ativo primeiro!!'
+          : !stockCode
+          ? 'Você precisa informar o código do ativo'
+          : !quantity
+          ? 'Você precisa informar a quantidade comprada e ela precisa ser superior a 0.'
+          : 'Por favor digite corretamente a quantidade, lembrando que quantidades negativas também não são aceitas';
+
+      Alert.alert(
+        'Importante!!!',
+        message,
+        [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+        {cancelable: false},
+      );
+      return;
+    }
     navigation.navigate('Result', {
       stockCode,
       dateBought,
       dateSold,
       quantity,
+      isRealStateStock,
     });
   };
 
@@ -177,6 +205,8 @@ const Home = ({navigation}) => {
             setDateSold={setDateSold}
             setQuantity={setQuantity}
             setStockCode={setStockCode}
+            isRealStateStock={isRealStateStock}
+            setIsRealStateStock={setIsRealStateStock}
           />
         </ProgressStep>
         <ProgressStep
@@ -188,6 +218,7 @@ const Home = ({navigation}) => {
             dateBought={dateBought}
             dateSold={dateSold}
             quantity={quantity}
+            isRealStateStock={isRealStateStock}
           />
         </ProgressStep>
       </ProgressSteps>

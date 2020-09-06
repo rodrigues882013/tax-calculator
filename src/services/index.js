@@ -1,3 +1,1 @@
-import {fetchData, buildReport} from './stock-service';
-
-export {fetchData, buildReport};
+export {fetchData, buildReport} from './stock-service';
