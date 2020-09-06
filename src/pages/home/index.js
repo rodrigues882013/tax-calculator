@@ -156,7 +156,12 @@ const Home = ({navigation}) => {
   );
 
   const onSubmit = () => {
-    navigation.navigate('Result');
+    navigation.navigate('Result', {
+      stockCode,
+      dateBought,
+      dateSold,
+      quantity,
+    });
   };
 
   return (
