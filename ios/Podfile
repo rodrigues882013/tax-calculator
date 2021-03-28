@@ -8,6 +8,14 @@ target 'TaxCalculator' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
   target 'TaxCalculatorTests' do
     inherit! :complete
     # Pods for testing
