@@ -4,7 +4,7 @@ Tax Calculator is an app to calculate the taxes applied
 on stock market operation, based in Brazilian Stock Market, with few inputs from user, the app is able to calculate an estimative about how much tax users must to pay.
 
 
-## Third Party Resources
+## Third-Party Resources
 
 The app use Yahoo Stock Data Finance Api to retrieve the stock's price history.
 
